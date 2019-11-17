@@ -12,7 +12,7 @@ module Solar
 
     # Julian Day as Rational
     def jd_r(t)
-      if false
+      if true
         # This computes JD with precision of seconds and yields smaller denominators
         t = t.utc
         t.to_date.ajd + Rational(t.hour,24) + Rational(t.min,1440) + Rational(t.sec,86_400)
