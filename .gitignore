@@ -8,3 +8,4 @@
 /spec/reports/
 /tmp/
 /rdoc/
+.rspec_status
