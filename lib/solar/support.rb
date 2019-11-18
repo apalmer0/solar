@@ -1,12 +1,4 @@
 module Solar
-
-  ALTITUDES = {
-    official:     -50/60.0,
-    civil:            -6.0,
-    nautical:        -12.0,
-    astronomical:    -18.0
-  }
-
   class <<self
     private
 
@@ -81,12 +73,6 @@ module Solar
     def to_td(t)
       t = t.utc
       t + to_r(delta_t(t))/86_400
-    end
-
-    # dynamical_time to utc
-    def to_utc(td)
-      raise 'Invalid dynamical time (should be utc)' unless td.utc?
-      td - to_r(delta_t(td))/86_400
     end
 
     # Compute difference between dynamical time and UTC in seconds.
@@ -208,21 +194,5 @@ module Solar
 
       [delta_rad, alpha_rad]
     end
-
-    def altitude_from_options(options)
-      if options.has_key?(:zenith)
-        zenith = options[:zenith]
-        if Symbol===zenith
-          altitude = ALTITUDES[zenith]
-        else
-          altitude = 90.0 - zenith
-        end
-      else
-        altitude = options[:altitude] || :official
-        altitude = ALTITUDES[altitude] if Symbol===altitude
-      end
-      altitude
-    end
   end
-
 end
