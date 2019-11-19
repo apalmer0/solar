@@ -2,6 +2,7 @@ require 'active_support'
 require 'active_support/time'
 require 'solar/version.rb'
 require 'solar/support.rb'
+require 'solar/equatorial_coordinates.rb'
 require 'solar/position.rb'
 
 # Calculation of solar position.
