@@ -11,7 +11,7 @@ module Solar
     let(:richmond) { { latitude: 37.5407, longitude: -77.4360 } }
     let(:north_pole) { { latitude: 90.0000, longitude: -135.000 } }
 
-    subject(:position) { Position.calculate(time, city[:latitude], city[:longitude]) }
+    subject(:position) { Position.new(time, city[:latitude], city[:longitude]) }
 
     context "boston" do
       let(:city) { boston }

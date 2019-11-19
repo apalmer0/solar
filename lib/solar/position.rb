@@ -2,42 +2,40 @@ include Support
 
 module Solar
   class Position
-    attr_reader :altitude, :azimuth
-
-    def self.calculate(datetime, latitude, longitude)
-      new(datetime, latitude, longitude).calculate
-    end
-
-    def initialize(datetime, latitude, longitude)
+    def initialize(datetime = nil, latitude, longitude)
       @datetime = datetime
       @latitude = latitude
       @longitude = longitude
     end
 
-    # Sun horizontal coordinates (relative position) in degrees:
-    def calculate
-      right_ascension = equatorial_position.right_ascension
-      declination = equatorial_position.declination
+    def azimuth
+      # azimuth in degrees measured clockwise (towards East) from North direction
+      raw_azimuth = to_degrees(
+        azimuth_rad(latitude_in_radians, equatorial_position.declination, hour_angle_in_radians)
+      )
 
-      latitude_rad = to_radians(latitude)
-      hour_angle_rad = to_radians(hour_angle(right_ascension))
+      (180 + raw_azimuth) % 360
+    end
 
+    def altitude
       # Local horizontal coordinates : Meeus pg 89
       # altitude in degrees; positive upwards
       @altitude = to_degrees(
-        altitude_rad(latitude_rad, declination, hour_angle_rad)
+        altitude_rad(latitude_in_radians, equatorial_position.declination, hour_angle_in_radians)
       )
-      # azimuth in degrees measured clockwise (towards East) from North direction
-       azimuth_start = to_degrees(
-        azimuth_rad(latitude_rad, declination, hour_angle_rad)
-      )
-      @azimuth = (180 + azimuth_start) % 360
-      self
     end
 
     private
 
     attr_reader :datetime, :latitude, :longitude
+
+    def latitude_in_radians
+      @latitude_in_radians ||= to_radians(latitude)
+    end
+
+    def hour_angle_in_radians
+      @hour_angle_in_radians ||= to_radians(hour_angle(equatorial_position.right_ascension))
+    end
 
     def equatorial_position
       @equatorial_position ||= EquatorialCoordinates.new(datetime)
@@ -62,18 +60,18 @@ module Solar
       time_at_greenwich %= 360
     end
 
-    def altitude_rad(latitude_rad, declination, hour_angle_rad)
+    def altitude_rad(latitude_in_radians, declination, hour_angle_in_radians)
       Math.asin(
-        Math.sin(latitude_rad) * Math.sin(declination) +
-        Math.cos(latitude_rad) * Math.cos(declination) * Math.cos(hour_angle_rad)
+        Math.sin(latitude_in_radians) * Math.sin(declination) +
+        Math.cos(latitude_in_radians) * Math.cos(declination) * Math.cos(hour_angle_in_radians)
       )
     end
 
-    def azimuth_rad(latitude_rad, declination, hour_angle_rad)
+    def azimuth_rad(latitude_in_radians, declination, hour_angle_in_radians)
       Math.atan2(
-        Math.sin(hour_angle_rad),
-        Math.cos(hour_angle_rad) * Math.sin(latitude_rad) -
-        Math.tan(declination) * Math.cos(latitude_rad)
+        Math.sin(hour_angle_in_radians),
+        Math.cos(hour_angle_in_radians) * Math.sin(latitude_in_radians) -
+        Math.tan(declination) * Math.cos(latitude_in_radians)
       )
     end
   end
