@@ -25,6 +25,10 @@ module Solar
       )
     end
 
+    def equinox_angle
+      @equinox_angle ||= 90 - latitude
+    end
+
     private
 
     attr_reader :datetime, :latitude, :longitude
