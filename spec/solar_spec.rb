@@ -11,7 +11,7 @@ module Solar
     let(:richmond) { { latitude: 37.5407, longitude: -77.4360 } }
     let(:north_pole) { { latitude: 90.0000, longitude: -135.000 } }
 
-    let(:position) { Position.calculate(time, city[:latitude], city[:longitude]) }
+    subject(:position) { Position.calculate(time, city[:latitude], city[:longitude]) }
 
     context "boston" do
       let(:city) { boston }
@@ -19,37 +19,29 @@ module Solar
       context "spring equinox" do
         let(:time) { spring_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(151.04)
-          expect(position.altitude).to be_within(1).of(43.55)
-        end
+        its(:azimuth) { should be_within(0.5).of(151.04) }
+        its(:altitude) { should be_within(0.5).of(43.55) }
       end
 
       context "summer_solstice" do
         let(:time) { summer_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(134.22)
-          expect(position.altitude).to be_within(1).of(65.38)
-        end
+        its(:azimuth) { should be_within(0.5).of(134.22) }
+        its(:altitude) { should be_within(0.5).of(65.38) }
       end
 
       context "fall_equinox" do
         let(:time) { fall_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(156.10)
-          expect(position.altitude).to be_within(1).of(45.12)
-        end
+        its(:azimuth) { should be_within(0.5).of(156.10) }
+        its(:altitude) { should be_within(0.5).of(45.12) }
       end
 
       context "winter_solstice" do
         let(:time) { winter_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(162.06)
-          expect(position.altitude).to be_within(1).of(22.15)
-        end
+        its(:azimuth) { should be_within(0.5).of(162.06) }
+        its(:altitude) { should be_within(0.5).of(22.15) }
       end
     end
 
@@ -59,37 +51,29 @@ module Solar
       context "spring equinox" do
         let(:time) { spring_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(90.91)
-          expect(position.altitude).to be_within(1).of(62.05)
-        end
+        its(:azimuth) { should be_within(0.5).of(90.91) }
+        its(:altitude) { should be_within(0.5).of(62.05) }
       end
 
       context "summer_solstice" do
         let(:time) { summer_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(45.93)
-          expect(position.altitude).to be_within(1).of(55.40)
-        end
+        its(:azimuth) { should be_within(0.5).of(45.93) }
+        its(:altitude) { should be_within(0.5).of(55.40) }
       end
 
       context "fall_equinox" do
         let(:time) { fall_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(90.33)
-          expect(position.altitude).to be_within(1).of(65.98)
-        end
+        its(:azimuth) { should be_within(0.5).of(90.33) }
+        its(:altitude) { should be_within(0.5).of(65.98) }
       end
 
       context "winter_solstice" do
         let(:time) { winter_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(135.36)
-          expect(position.altitude).to be_within(1).of(55.77)
-        end
+        its(:azimuth) { should be_within(0.5).of(135.36) }
+        its(:altitude) { should be_within(0.5).of(55.77) }
       end
     end
 
@@ -99,37 +83,29 @@ module Solar
       context "spring equinox" do
         let(:time) { spring_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(211.11)
-          expect(position.altitude).to be_within(1).of(22.30)
-        end
+        its(:azimuth) { should be_within(0.5).of(211.11) }
+        its(:altitude) { should be_within(0.5).of(22.30) }
       end
 
       context "summer_solstice" do
         let(:time) { summer_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(220.41)
-          expect(position.altitude).to be_within(1).of(44.76)
-        end
+        its(:azimuth) { should be_within(0.5).of(220.41) }
+        its(:altitude) { should be_within(0.5).of(44.76) }
       end
 
       context "fall_equinox" do
         let(:time) { fall_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(215.30)
-          expect(position.altitude).to be_within(1).of(21.65)
-        end
+        its(:azimuth) { should be_within(0.5).of(215.30) }
+        its(:altitude) { should be_within(0.5).of(21.65) }
       end
 
       context "winter_solstice" do
         let(:time) { winter_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(208.20)
-          expect(position.altitude).to be_within(1).of((-0.47))
-        end
+        its(:azimuth) { should be_within(0.5).of(208.20) }
+        its(:altitude) { should be_within(0.5).of((-0.47)) }
       end
     end
 
@@ -139,37 +115,29 @@ module Solar
       context "spring equinox" do
         let(:time) { spring_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(140.38)
-          expect(position.altitude).to be_within(1).of(44.77)
-        end
+        its(:azimuth) { should be_within(0.5).of(140.38) }
+        its(:altitude) { should be_within(0.5).of(44.77) }
       end
 
       context "summer_solstice" do
         let(:time) { summer_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(115.76)
-          expect(position.altitude).to be_within(1).of(64.12)
-        end
+        its(:azimuth) { should be_within(0.5).of(115.76) }
+        its(:altitude) { should be_within(0.5).of(64.12) }
       end
 
       context "fall_equinox" do
         let(:time) { fall_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(145.13)
-          expect(position.altitude).to be_within(1).of(46.92)
-        end
+        its(:azimuth) { should be_within(0.5).of(145.13) }
+        its(:altitude) { should be_within(0.5).of(46.92) }
       end
 
       context "winter_solstice" do
         let(:time) { winter_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(155.22)
-          expect(position.altitude).to be_within(1).of(24.85)
-        end
+        its(:azimuth) { should be_within(0.5).of(155.22) }
+        its(:altitude) { should be_within(0.5).of(24.85) }
       end
     end
 
@@ -179,37 +147,29 @@ module Solar
       context "spring equinox" do
         let(:time) { spring_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(95.51)
-          expect(position.altitude).to be_within(1).of(0.26)
-        end
+        its(:azimuth) { should be_within(0.5).of(95.51) }
+        its(:altitude) { should be_within(0.5).of(0.26) }
       end
 
       context "summer_solstice" do
         let(:time) { summer_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(97.02)
-          expect(position.altitude).to be_within(1).of(23.48)
-        end
+        its(:azimuth) { should be_within(0.5).of(97.02) }
+        its(:altitude) { should be_within(0.5).of(23.48) }
       end
 
       context "fall_equinox" do
         let(:time) { fall_equinox }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(99.44)
-          expect(position.altitude).to be_within(1).of(0.52)
-        end
+        its(:azimuth) { should be_within(0.5).of(99.44) }
+        its(:altitude) { should be_within(0.5).of(0.37) }
       end
 
       context "winter_solstice" do
         let(:time) { winter_solstice }
 
-        it "calculates the azimuth and altitude" do
-          expect(position.azimuth).to be_within(1).of(97.98)
-          expect(position.altitude).to be_within(1).of((-23.41))
-        end
+        its(:azimuth) { should be_within(0.5).of(97.98) }
+        its(:altitude) { should be_within(0.5).of((-23.41)) }
       end
     end
   end
